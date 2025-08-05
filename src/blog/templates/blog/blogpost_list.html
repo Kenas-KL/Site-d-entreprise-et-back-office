@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <title>SoftPlanetCompany</title>
+{% endblock %}
+{% block max_content %}
+    <div class="index">
+            <div class="in-index">
+                <h1>Des systèmes sur mesure pour rester connecter</h1>
+                <p>Nous sommes un intégrateur des systèmes de confiance dans le secteur TIC</p>
+            </div>
+            <div class="imagezone">
+                <img src="{% static 'imgs/content_logo.png' %}" width="345px" height="345px">
+                <div class="to-int">
+                    <a href="{% url 'blog:done' %}"><button class="to_">Blogs d'évènements</button></a>
+                </div>
+            </div>
+    </div>
+{% endblock %}
+    <div class="main">
+{% block content %}
+        <div class="top-content">
+            {% if blogs %}
+            {% for blog in blogs %}
+                <div class="blogs">
+                    <div class="title-at-home">
+                        <h2 class="title-level-2">{{ blog.title }}</h2>
+                    </div>
+                    <div class="content-blog">
+                        {% if blog.thumbnail %}
+                            <div class="imagezone ima-zone">
+                                <img src="{{ blog.thumbnail.url }}" class="blog_image">
+                            </div>
+                        {% endif %}
+                        <p>{{ blog.content|safe }}</p>
+                    </div>
+                </div>
+            <br>
+            {% endfor %}
+            {% endif %}
+        </div>
+{% endblock %}
+    </div>

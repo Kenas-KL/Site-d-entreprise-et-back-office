@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>{{ task.title }}</title>
+{% endblock %}
+{% block content %}
+    <div class="main">
+            <h3>{{ task.title }}</h3>
+            <div class="detail_task">
+                Priorité: {{ task.priorite }}<br>
+                Statut: {{ task.statut }}<br>
+                Avancement: {{ task.avancement }}%<br>
+                Responsable: {{ task.responsable }}{% if request.user == task.responsable %}(Moi){%endif%}<br>
+                Déscription: {{ task.description }}<br>
+                Commentaire: {{ task.commentaires }}<br>
+                Début: {{ task.date_de_debut }}<br>
+                Date finale: {{ task.date_de_fin }}<br>
+            </div>
+            <br>
+            <a href="{% url 'blog:task_view' %}">Retour</a>
+
+    </div>
+{% endblock %}

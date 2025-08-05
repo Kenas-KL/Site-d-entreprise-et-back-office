@@ -1,0 +1,23 @@
+<!doctype html>
+{% load static %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block title %}
+        <title>Compte créée</title>
+    {% endblock %}
+</head>
+<body>
+
+    <div class="content">
+        <p>Merci de votre inscrition <b>{{ user }}</b> à ce site, votre compte a été créée avec succès.</p>
+        <p>Veuillez contactez les administrateurs du site pour avoir les droits d'accès.</p>
+        <a href="{% url 'blog:home' %}">cliquer ici pour vous diriger vers l'acceuil du site</a>
+    </div>
+
+</body>
+</html>

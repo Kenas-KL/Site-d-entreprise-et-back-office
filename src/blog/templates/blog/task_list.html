@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>List des Taches</title>
+{% endblock %}
+
+{% block content %}
+        <div class="task_area">
+            <h3>Projets(Taches)</h3>
+            <div class="add_task">
+                <a href="{% url 'blog:add_task' %}"><button><svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="indianred"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg></button></a>
+            </div>
+            <hr>
+            <div class="tasks">
+                {% for tache in taches %}
+                <div class="task">
+                    <div class="title_task head">
+                        {{ tache.title}}
+                        <br>
+                        Priorité: {{ tache.priorite}}
+                    </div>
+                    <div class="view_task">
+                        <div class="title_ head">Responsable:{% if request.user == tache.responsable %} Moi {% else %} {{ tache.responsable }} {% endif %}</div>
+                        <div class="title_ head">Statut: {{ tache.statut}}</div>
+                    </div>
+                    <div class="delay">
+                        {{ tache.date_de_debut}}
+                        <br>
+                       |
+                        <br>
+                        {{ tache.date_de_fin}}
+                    </div>
+                    <a href="{% url 'blog:detail_task_view' pk=tache.pk %}"><button class="btn detail"><svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="indianred"><path d="m298-262-56-56 121-122H80v-80h283L242-642l56-56 218 218-218 218Zm222-18v-80h360v80H520Zm0-320v-80h360v80H520Zm120 160v-80h240v80H640Z"/></svg></button></a>
+                    {% if request.user == tache.responsable %}
+                    <a href="{% url 'blog:edit_task' pk=tache.pk %}"><button class="btn modify"><svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="aliceblue"><path d="M160-400v-80h280v80H160Zm0-160v-80h440v80H160Zm0-160v-80h440v80H160Zm360 560v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q8 9 12.5 20t4.5 22q0 11-4 22.5T863-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z"/></svg></button></a>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+{% endblock %}

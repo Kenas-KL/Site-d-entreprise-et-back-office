@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="blogs">
+        <div class="title">
+            <h2 class="title-level-2">{{ blog.title }}</h2>
+        </div>
+        <div class="content-blog">
+            {% if blog.thumbnail %}
+                <div class="imagezone ima-zone">
+                    <img src="{{ blog.thumbnail.url }}" class="blog_image">
+                </div>
+            {% endif %}
+            <div class="commented">
+                <div class="comment">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="validate">
+                            <input type="submit" value="Commenter">
+                        </div>
+                    </form>
+                    <a href="{% url 'blog:done' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26x" fill="teal"><path d="M280-200v-80h284q63 0 109.5-40T720-420q0-60-46.5-100T564-560H312l104 104-56 56-200-200 200-200 56 56-104 104h252q97 0 166.5 63T800-420q0 94-69.5 157T564-200H280Z"/></svg>
+                    </a>
+                    <br>
+                    <h4><em>{% if comments_quantity %}{{ comments_quantity }} Commentaire(s) {% endif %}</em></h4>
+                </div>
+                    {% for commentaire in commentaires %}
+                        <div class="comment-widget">
+                            <div class="title-comment">
+                                <strong>
+                                    {% if commentaire.user %}
+                                        {{ commentaire.user.username }}
+                                    {% else %}
+                                        {{ commentaire.anonymous }}
+                                    {% endif %}
+                                </strong>
+                            </div>
+                            <div class="content-comment">
+                                {{ commentaire.content }}<br>
+                            </div>
+                            <div class="posted">
+                                <em><small>posté le {{ commentaire.created_at }}</small></em>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <small>Aucun commentaire</small>
+                    {% endfor %}
+                </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

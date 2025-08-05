@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>Interventions</title>
+{% endblock %}
+
+{% block content %}
+    <div class="blogs">
+        {% for blog in events %}
+            {% if blog.event.our_intervention %}
+            <hr>
+                {% if blog.event.thumbnail %}
+                    <small>Image : {{ blog.event.title }}</small>
+                    <div class="imagezone ima-zone">
+                        <img src="{{ blog.event.thumbnail.url }}" class="blog_image">
+                    </div>
+                {% endif %}
+            <div class="title">
+                <h2>{{ blog.event.title }}</h2>
+            </div>
+            <small> {{ blog.comments_count }} commentaire(s) |</small>
+            <a href="{% url 'blog:blog_detail' pk=blog.event.pk %}"><small>Ajouter un commentaire</small></a>
+            <div class="content-blog">
+                <p>{{ blog.event.content|safe }}</p>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

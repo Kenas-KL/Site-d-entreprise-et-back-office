@@ -1,0 +1,27 @@
+{% extends 'admin_base.html' %}
+
+{% block title_admin %}BlogPost(List) <div class="return"><a href="{% url 'blog:administration' %}"><svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26x" fill="mintcream"><path d="M280-200v-80h284q63 0 109.5-40T720-420q0-60-46.5-100T564-560H312l104 104-56 56-200-200 200-200 56 56-104 104h252q97 0 166.5 63T800-420q0 94-69.5 157T564-200H280Z"/></svg></a></div>{% endblock %}
+
+
+{% block add_or_modify %}
+    <li><h4>Ajouter</h4><a href="{% url 'blog:add_blog' %}"><button><svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="indianred"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg></button></a></li>
+<hr>
+
+{% endblock %}
+
+{% block content_admin %}
+    <ul>
+    {% for blog in blogs %}
+        <li class="item">
+            <a href="">{{ blog.title|safe|truncatewords:4 }}</a>
+
+            <div class="action">
+                Publié: {% if blog.published %}Oui{% else %}Non{% endif %} - Inter: {% if blog.our_intervention %}Oui{% else %}Non{% endif %}
+                <a href="{% url 'blog:edit_blog' pk=blog.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="#1c8496"><path d="M160-400v-80h280v80H160Zm0-160v-80h440v80H160Zm0-160v-80h440v80H160Zm360 560v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q8 9 12.5 20t4.5 22q0 11-4 22.5T863-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z"/></svg></a>
+                <a href="{% url 'blog:admin_delete_blog' pk=blog.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="indianred"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg></a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

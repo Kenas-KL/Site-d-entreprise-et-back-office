@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Documents-Softplanetcompany</title>
+{% endblock %}
+{% block content %}
+<div class="theque">
+    <h2>Bibliothèque Numérique</h2>
+<h3>{% if documents %}Documents : {{ request.user.domain }} {% else %} <small>aucun document</small> {% endif %}</h3>
+    <small>Utilisateur: <b>{{ request.user.username }}</b></small>
+    <hr>
+    <div class="course">
+        {% for document in documents %}
+                <br>
+            {% if document.level <= request.user.level %}
+                <div class="document">
+                    <a href="{{ document.book_file.url }}">
+                        <b>{{ document.title }}</b>
+                    </a>
+                    <div class="description">
+                        <small>
+                        <br>
+                        <b>Niveau: {{ document.level }}</b>
+                        <br>{{ document.description }}
+                        </small>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
